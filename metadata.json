@@ -1,0 +1,6 @@
+{
+  "name": "Trợ Lý Của Gà Mẹ",
+  "description": "Hệ thống học ngữ pháp tiếng Anh đáng yêu dành cho học sinh, đồng hành cùng Gà Mẹ và các bạn gà con.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

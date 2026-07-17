@@ -1,0 +1,196 @@
+.sidebar {
+  width: 16rem;
+  height: 100%;
+  background-color: white;
+  border-right: 1px solid var(--color-art-beige);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.sidebar-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #facc15;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-title {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #ca8a04;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin: 0;
+}
+
+.sidebar-subtitle {
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #94a3b8;
+  display: block;
+  letter-spacing: 0.05em;
+  margin-top: 0.125rem;
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-tab {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 1rem;
+  transition: all 0.2s;
+  background: none;
+  text-align: left;
+}
+
+.tab-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tab-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.tab-badge {
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 900;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  min-width: 1.25rem;
+  text-align: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Inactive tabs */
+.sidebar-tab.inactive {
+  color: #64748b;
+}
+
+.sidebar-tab.inactive.color-yellow:hover { background-color: rgba(254, 252, 232, 0.5); color: #ca8a04; }
+.sidebar-tab.inactive.color-blue:hover { background-color: rgba(239, 246, 255, 0.5); color: #2563eb; }
+.sidebar-tab.inactive.color-pink:hover { background-color: rgba(253, 242, 248, 0.5); color: #db2777; }
+.sidebar-tab.inactive.color-green:hover { background-color: rgba(240, 253, 244, 0.5); color: #16a34a; }
+.sidebar-tab.inactive.color-purple:hover { background-color: rgba(250, 245, 255, 0.5); color: #9333ea; }
+
+/* Active tabs */
+.sidebar-tab.active {
+  font-weight: 700;
+}
+
+.sidebar-tab.active.color-yellow { background-color: #fefce8; color: #a16207; border-color: #fef08a; }
+.sidebar-tab.active.color-blue { background-color: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.sidebar-tab.active.color-pink { background-color: #fdf2f8; color: #be185d; border-color: #fbcfe8; }
+.sidebar-tab.active.color-green { background-color: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+.sidebar-tab.active.color-purple { background-color: #faf5ff; color: #7e22ce; border-color: #e9d5ff; }
+
+/* User Info Section */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-art-beige);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.user-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 2px solid white;
+  background-color: #fef3c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 700;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.user-details {
+  overflow: hidden;
+}
+
+.user-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.user-status {
+  font-size: 0.625rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.logout-btn:hover {
+  color: #ef4444;
+}
+
+.logout-icon {
+  font-size: 1.25rem;
+}

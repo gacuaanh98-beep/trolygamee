@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-sans: "Quicksand", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fredoka", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-art-cream: #FFFDF7;
+  --color-art-beige: #F0EAD6;
+  --color-art-warm: #FFFAF0;
+  --color-art-warm-border: #FFE8B6;
+  --color-art-blue-border: #E8F1F2;
+  --color-art-pink-border: #FFE5ED;
+  --color-art-green-border: #E7F7ED;
+  --color-art-purple-border: #F3EDFF;
+}
+
+body {
+  background-color: #FFFDF7;
+  color: #1e293b; /* slate-800 */
+  font-family: var(--font-sans);
+}
+
+/* Custom scrollbar to keep layout clean and artistic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E8DCC4;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4B594;
+}
+
+/* Backface visibility utility for flippable flashcards */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
