@@ -1,0 +1,40 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Hàm kiểm tra xem người dùng đã đăng nhập chưa
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Hàm kiểm tra xem người dùng có phải là chính chủ không (dựa trên uid)
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Bảng users: Mỗi người chỉ được đọc/ghi thông tin của chính mình
+    // (Sau này nếu có role giáo viên, có thể thêm logic cho giáo viên xem tất cả)
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Bảng progress: Mỗi người chỉ được đọc/ghi tiến trình học của chính mình
+    // Lưu ý: Tài liệu progress nên có trường 'userId' để kiểm tra
+    match /progress/{progressId} {
+      allow read, write: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      // Cho phép đọc nếu data hiện tại là của user đó
+      allow read, update, delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Bảng units (Bài học): Bất kỳ ai đăng nhập cũng có thể đọc, nhưng không được ghi
+    match /units/{unitId} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Tạm khóa, chỉ admin thêm qua console hoặc script
+    }
+
+    // Chặn tất cả các quyền truy cập khác theo mặc định để bảo mật
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

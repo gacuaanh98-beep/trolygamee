@@ -3,6 +3,8 @@ import { motion } from "motion/react";
 import { Info, AlertCircle, HelpCircle, Sparkles, User as UserIcon } from "lucide-react";
 import { User } from "../types";
 import { store } from "../lib/store";
+import { auth, googleProvider, isConfigured } from "../lib/firebase";
+import { signInWithPopup } from "firebase/auth";
 import "./LoginScreen.css";
 
 interface LoginScreenProps {
@@ -21,6 +23,46 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
       return false;
     }
   });
+
+  const handleGoogleLogin = async () => {
+    if (!isConfigured) {
+      setError("Firebase chưa được cấu hình. Vui lòng thêm config vào file .env!");
+      return;
+    }
+    
+    setError(null);
+    setIsLoading(true);
+    
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      
+      const users = store.getUsers();
+      let student = users.find((u) => u.email === user.email);
+      
+      if (student) {
+        if (student.status === "locked") {
+          throw new Error("Tài khoản của con đang bị tạm khóa.");
+        }
+        onLoginSuccess(student);
+      } else {
+        const newStudentId = "student_" + user.uid.substring(0, 9);
+        const newUser = store.addUser({
+          id: newStudentId,
+          email: user.email || `${user.uid}@gami.com`,
+          name: user.displayName || "Học Sinh Google",
+          role: "student",
+          status: "active"
+        });
+        onLoginSuccess(newUser);
+      }
+    } catch (err: any) {
+      console.error(err);
+      setError("Đăng nhập Google thất bại: " + err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -190,6 +232,23 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
               )}
             </button>
           </form>
+
+          {isConfigured && (
+            <div className="google-login-container">
+              <div className="divider">
+                <span>HOẶC</span>
+              </div>
+              <button 
+                type="button" 
+                onClick={handleGoogleLogin} 
+                disabled={isLoading}
+                className="google-btn"
+              >
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="google-icon" />
+                Đăng nhập bằng Google
+              </button>
+            </div>
+          )}
 
           {/* Quick Help for Reviewer */}
           {!hideHelperPermanently && (
